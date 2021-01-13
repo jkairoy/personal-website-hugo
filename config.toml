@@ -1,0 +1,9 @@
+baseURL = "http://example.org/"
+languageCode = "en-us"
+title = "My New Hugo Site"
+[author]
+name = "Johnny Roy"
+summary = "Software Engineer and HCI Researcher Studying Computer Science at Brown University"
+email = "john_roy1@brown.edu"
+[markup.goldmark.renderer]
+unsafe = true

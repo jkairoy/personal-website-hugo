@@ -1,0 +1,87 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+<script type="text/javascript" src="/javascript/navigate.js"></script>
+<script type="text/javascript" src="/javascript/animateproject.js"></script>
+<script type="text/javascript" src="/javascript/header.js"></script>
+<link rel="stylesheet" href="https://use.typekit.net/uby0rot.css">
+<head>
+    <meta name=viewport content='width=700'>
+    <link rel="stylesheet" type="text/css" href="/css/portfolio.css">
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <title> {{.Site.Author.name}} </title>
+    <link rel="icon" type="image/png" href="/images/shebang.png">
+</head>
+<body>
+<span id="portfolio"></span>
+{{ partial "header.html" . }}
+<section class="titleSection">
+    <div>
+        <div id="titleHider" class="hider">
+            <h1>
+                {{.Params.title}}
+            </h1>
+        </div>
+        <div id="title2Hider" class="hider">
+            <sub>
+                {{range $index, $tag := .Params.tags}}
+                {{if gt $index 0}} / {{end}}
+                {{upper .}}
+                {{end}}
+            </sub>
+        </div>
+        <div id="title3Hider" class="hider">
+            <div class="projectDescription">
+                {{.Params.description}}
+            </div>
+        </div>
+        <div id="title4Hider" class="hider">
+            <div class="descriptionRow">
+                {{ if (isset .Params "tech")}}
+                <div class="discreteList" style="margin-right: 10px">
+                    <h4>TECH</h4>
+                    {{range .Params.tech}}
+                    {{.}}
+                    {{end}}
+                </div>
+                {{end}}
+                {{ if (isset .Params "roles")}}
+                <div class="discreteList" style="margin-right: 10px">
+                    <h4>ROLE</h4>
+                    {{range $index, $role := .Params.roles}}
+                    {{if gt $index 0}} / {{end}}
+                    {{.}}
+                    {{end}}
+                </div>
+                {{end}}
+                {{ if (isset .Params "team")}}
+                <div class="discreteList" style="margin-right: 10px">
+                    <h4>TEAM</h4>
+                    {{.Params.team}}
+                </div>
+                {{end}}
+                <div class="discreteList" style="margin-right: 10px">
+                    <h4>WHEN</h4>
+                    {{.Params.date_string}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {{with .Resources.GetMatch "thumbnail.png"}}
+    <img id="introPicture" class="projectImage" src="{{.Permalink}}"/>
+    {{end}}
+</section>
+
+{{.Content}}
+
+<footer class="footerBody">
+    <div class="paddingWrap">
+        <div class="footerContent">
+            <sub style="opacity: 0.5; font-size: 14px">
+                Written and Designed by John Roy © 2019
+            </sub>
+        </div>
+    </div>
+</footer>
+</body>
+</html>

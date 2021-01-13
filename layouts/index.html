@@ -1,0 +1,81 @@
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.19.1/TweenMax.min.js"></script>
+<script type="text/javascript" src="/javascript/animatehome.js"></script>
+<script type="text/javascript" src="/javascript/blob.js"></script>
+<script type="text/javascript" src="/javascript/header.js"></script>
+<script type="text/javascript" src="/javascript/navigate.js"></script>
+<link rel="stylesheet" href="https://use.typekit.net/uby0rot.css">
+<head>
+    <meta name=viewport content='width=700'>
+    <link rel="stylesheet" type="text/css" href="/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/css/home.css">
+    <title> {{.Site.Author.name}} </title>
+    <link rel="icon" type="image/png" href="/images/shebang.png">
+</head>
+<body>
+<span id="index"> </span>
+{{ partial "header.html" . }}
+<div class="content">
+    <div class="paddingWrap">
+        <section class="introSlide">
+            <div>
+                <div class="hider" id="introTitleHider">
+                    <h1>
+                        Hi, I'm {{.Site.Author.name}}
+                    </h1>
+                </div>
+                <div class="hider" id="introDescriptionHider">
+                    <div class="summary" style="margin-bottom: 4px">
+                        {{.Site.Author.summary}}
+                    </div>
+                </div>
+                <div id="arrow" class="arrowContainer">
+                    <span class="arrowStem"></span>
+                    <div>
+                        <span class="arrowTip"> </span>
+                    </div>
+                </div>
+            </div>
+            <div class="landingImageContainer">
+                <img id="meflat" src="images/meflat.svg" height="350" width="auto" style="opacity: 0"/>
+                <img id="float" src="images/float.svg" class="floatImage" height="350" width="auto" style="opacity: 0"/>
+                <img id="blob" src="images/blob.svg" class="blobImage" height="465" width="auto" style="opacity: 0"/>
+                <img id="shadow" src="images/shadow.svg" class="shadowImage" height="350px" width="auto"
+                     style="opacity: 0"/>
+            </div>
+        </section>
+    </div>
+    <section id="work" class="workSection">
+        {{range $index, $project := $.Site.RegularPages}}
+        <div class="workSlide">
+            <div class="workInnerContainer">
+                <div class="workShiftedContainer">
+                    <h4>
+                        {{range $index, $tag := .Params.tags}}
+                        {{if gt $index 0}} / {{end}}
+                        {{upper .}}
+                        {{end}}
+                    </h4>
+                    <h2>
+                        {{.Params.title}}
+                    </h2>
+                    <div>
+                        {{.Params.description}}
+                    </div>
+                    <div class="tag">
+                        {{.Params.category}}
+                    </div>
+                    <a href="{{.Permalink}}" class="seeMore">See More</a>
+                </div>
+            </div>
+            {{with .Resources.GetMatch "thumbnail.png"}}
+            <img class="projectImage" src="{{.Permalink}}" style="right: 0; height: 380px"/>
+            {{end}}
+        </div>
+        {{end}}
+    </section>
+    {{ partial "footer.html" . }}
+</div>
+</body>
+</html>
